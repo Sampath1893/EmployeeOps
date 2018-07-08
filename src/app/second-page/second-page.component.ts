@@ -10,6 +10,9 @@ export class SecondPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+    
   }
+ dateTest :Date =new Date();
 
 }
