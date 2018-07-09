@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyNavComponent } from './my-nav/my-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
-import { FirstPageComponent } from './first-page/first-page.component';
+import { ProfileComponent } from './Profile/Profile.component';
 import { SecondPageComponent } from './second-page/second-page.component';
 import { ThirdPageComponent } from './third-page/third-page.component';
 import { LoginComponent } from './login/login.component';
@@ -24,7 +24,7 @@ const appRoutes:Routes = [
   {path : '',component:MyNavComponent,canActivate: [AuthGuard],
 
   children:[
-    {path : 'first-page', component: FirstPageComponent},
+    {path : 'Profile', component: ProfileComponent},
     {path : 'second-page', component:SecondPageComponent},
     {path : 'third-page', component: ThirdPageComponent}
   ]
@@ -38,7 +38,7 @@ const appRoutes:Routes = [
   declarations: [
     AppComponent,
     MyNavComponent,
-    FirstPageComponent,
+    ProfileComponent,
     SecondPageComponent,
     ThirdPageComponent,
     LoginComponent
