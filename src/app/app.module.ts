@@ -8,8 +8,7 @@ import { MyNavComponent } from './my-nav/my-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
 import { ProfileComponent } from './Profile/Profile.component';
-import { SecondPageComponent } from './second-page/second-page.component';
-import { ThirdPageComponent } from './third-page/third-page.component';
+
 import { LoginComponent } from './login/login.component';
 import {MatInputModule} from '@angular/material/input'
 import { FormsModule } from '@angular/forms';
@@ -25,8 +24,8 @@ const appRoutes:Routes = [
 
   children:[
     {path : 'Profile', component: ProfileComponent},
-    {path : 'second-page', component:SecondPageComponent},
-    {path : 'third-page', component: ThirdPageComponent}
+    // {path : 'second-page', component:SecondPageComponent},
+    // {path : 'third-page', component: ThirdPageComponent}
   ]
 },
   {path : 'login',component:LoginComponent},
@@ -39,8 +38,6 @@ const appRoutes:Routes = [
     AppComponent,
     MyNavComponent,
     ProfileComponent,
-    SecondPageComponent,
-    ThirdPageComponent,
     LoginComponent
     
   ],
