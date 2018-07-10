@@ -6,17 +6,23 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyNavComponent } from './my-nav/my-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule } from '@angular/material';
+import { MatToolbarModule, 
+  MatButtonModule, 
+  MatSidenavModule, 
+  MatIconModule, 
+  MatListModule, 
+  MatCardModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatTabsModule } from '@angular/material';
 import { ProfileComponent } from './Profile/Profile.component';
 
 import { LoginComponent } from './login/login.component';
-import {MatInputModule} from '@angular/material/input'
-import { FormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthenticationService } from './services/authentication.service';
-
-
 
 
 const appRoutes:Routes = [
@@ -54,11 +60,17 @@ const appRoutes:Routes = [
     MatCardModule,
     MatInputModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTabsModule,
+    
   ],
   providers: [
     AuthGuard,
     AuthenticationService
+    
 
   ],
   bootstrap: [AppComponent]
