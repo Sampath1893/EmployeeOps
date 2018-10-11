@@ -23,7 +23,7 @@ import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthenticationService } from './services/authentication.service';
-
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes:Routes = [
   {path : '',component:MyNavComponent,canActivate: [AuthGuard],
@@ -35,6 +35,8 @@ const appRoutes:Routes = [
   ]
 },
   {path : 'login',component:LoginComponent},
+  
+
 
 { path: '**', redirectTo: '' }
 ]
@@ -65,6 +67,7 @@ const appRoutes:Routes = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatTabsModule,
+    HttpClientModule
     
   ],
   providers: [

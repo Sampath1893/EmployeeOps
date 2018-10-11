@@ -12,7 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class LoginComponent implements OnInit {
   hide : boolean = true;
   returnUrl: string;
-  
+  userData = {}
   
   constructor(public snackBar: MatSnackBar, 
     private authenticationService: AuthenticationService,
@@ -25,16 +25,15 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  checkLogin(userid,password){
-      
-      if(this.authenticationService.login(userid, password)){
-        this.router.navigate([this.returnUrl]);
-        
-      }
-      else{
-        this.openSnackBar("Please Provide Valid Credentials","Close");
-        
-      }
+  checkLogin(){
+
+  this.authenticationService.login(this.userData)
+  .subscribe(
+    res => {this.openSnackBar("Welcome "+res[0].name,"Close");
+            localStorage.setItem('currentUser', res[0].employeeID);
+            this.router.navigate([this.returnUrl])},
+    err => this.openSnackBar(err.error,"close")
+  )
     
   }
 
