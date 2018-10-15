@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
+const dailyData = require ('../models/dailyLogin')
 const mongoose = require('mongoose')
 const db="mongodb://sampath:sampath123@ds131711.mlab.com:31711/employeeops"
 
@@ -23,9 +24,9 @@ router.get('/',(req, res)=>{
 
 router.post('/login',(req,res)=>{
     let userData = req.body
-    console.log(userData)
+   // console.log(userData)
     User.find({employeeID: userData.userID},(error,user)=>{
-       console.log(user)
+     //  console.log(user)
         if(error){
             console.log(error)
         }
@@ -34,8 +35,8 @@ router.post('/login',(req,res)=>{
                 res.status(401).send('Invalid UserID')
             }
             else{
-                console.log(user.password)
-                console.log(userData.password)
+                //console.log(user.password)
+               // console.log(userData.password)
                 if(user[0].password !== userData.password){
                     res.status(401).send('Invalid Passsword')
                 }
@@ -46,6 +47,24 @@ router.post('/login',(req,res)=>{
         }
     })
 })
+
+router.post('/dailyLogin',(req,res)=>{
+    let loginData=req.body
+    console.log(loginData)
+    let dailyData=new dailyLogin(loginData)
+    user.save((error,updatedData)=>{
+        if(error){
+            console.log(error)
+        }
+        else{
+            res.status(200).send(updatedData)
+        }
+
+    })
+
+
+})
+
 module.exports =  router
 
 
