@@ -51,8 +51,10 @@ router.post('/login',(req,res)=>{
 router.post('/dailyLogin',(req,res)=>{
     let loginData=req.body
     console.log(loginData)
-    let dailyData=new dailyLogin(loginData)
-    user.save((error,updatedData)=>{
+    let dayData=new dailyData(loginData)
+
+    console.log(dailyData)
+    dayData.save((error,updatedData)=>{
         if(error){
             console.log(error)
         }

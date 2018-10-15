@@ -2,10 +2,10 @@ const mongoose=require('mongoose')
 const Schema=mongoose.Schema
 
 const dailyLoginSchema = new Schema({
-    date: Date,
+    date: String,
     employeeID: String,
-    inTime: Date,
-    outTime:Date,
+    inTime: String,
+    outTime:String,
     totalWorkingTime: String,
     otherLocation: String
 

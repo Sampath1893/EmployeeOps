@@ -3,6 +3,7 @@ import {MatSnackBar} from '@angular/material';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DailyLoginService } from '../services/daily-login.service';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -10,6 +11,7 @@ import { DailyLoginService } from '../services/daily-login.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
   hide : boolean = true;
   returnUrl: string;
@@ -44,17 +46,26 @@ export class LoginComponent implements OnInit {
     
   }
   updateDailyLogin(){
+   const pipe = new DatePipe('en-US');
+   const loginTime= new Date;
 
-    console.log(today | date: 'dd/MM/yyyy')
-    // @ts-ignore
-    console.log(this.userData.userID)
+    let uploadObj={
 
-    /* this.dailyLogin.updateDailyLogin(this.userData)
+      date: pipe.transform(loginTime,'shortDate'),
+       // @ts-ignore
+  employeeID: this.userData.userID,
+  inTime: pipe.transform(loginTime,'mediumTime')
+
+
+    }
+   
+
+    this.dailyLogin.updateDailyLogin(uploadObj)
             .subscribe(
 
               res => console.log(res),
               err => console.log(err)
-            ) */
+            ) 
   }
 
   ngOnInit() {
