@@ -4,7 +4,7 @@ const User = require('../models/user')
 const dailyData = require ('../models/dailyLogin')
 const mongoose = require('mongoose')
 const db="mongodb://sampath:sampath123@ds131711.mlab.com:31711/employeeops"
-
+mongoose.set('useFindAndModify', false)
 mongoose.connect(db, { useNewUrlParser: true },err =>{
 
     if(err){
@@ -50,10 +50,32 @@ router.post('/login',(req,res)=>{
 
 router.post('/dailyLogin',(req,res)=>{
     let loginData=req.body
-    console.log(loginData)
-    let dayData=new dailyData(loginData)
+   
+    dailyData.find({date: loginData.date,employeeID:loginData.employeeID},(error,userloginData)=>{
 
-    console.log(dailyData)
+if(error){
+console.log(error)
+}
+else{
+if(userloginData.length>0 ){
+
+    if(loginData.outTime){
+    dailyData.findOneAndUpdate({date: loginData.date,employeeID:loginData.employeeID},{$set:req.body},{new:false},(error,userUpdatedData)=>{
+
+        if(error){
+            console.log(error)
+            }
+            else{
+                console.log(userUpdatedData)
+            }
+
+    })
+}
+}
+else{
+
+    
+    let dayData=new dailyData(loginData)
     dayData.save((error,updatedData)=>{
         if(error){
             console.log(error)
@@ -63,6 +85,12 @@ router.post('/dailyLogin',(req,res)=>{
         }
 
     })
+
+}
+}
+    })
+    
+   
 
 
 })
