@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { DailyLoginService } from '../services/daily-login.service';
+import {MatSnackBar} from '@angular/material';
 
 import { Observable } from 'rxjs';
 
@@ -10,8 +11,16 @@ import { Observable } from 'rxjs';
 })
 
 export class AuthenticationService {
-  constructor(private http: HttpClient,private dailyLogin:DailyLoginService) {  
+  constructor(public snackBar: MatSnackBar,private http: HttpClient,private dailyLogin:DailyLoginService) {  
    }
+
+   openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
+
    private _loginUrl="http://localhost:3000/api/login";
   login(userData) {
      
@@ -36,7 +45,11 @@ export class AuthenticationService {
     this.dailyLogin.updateDailyLogin(uploadObj)
     .subscribe(
 
-      res => localStorage.removeItem('currentUser'),
+      res => {
+        /*if(res.date=="SessionTimedOut"){
+          this.openSnackBar("Logout Session Timed Out!","Close");
+        }*/
+        localStorage.removeItem('currentUser')},
       err => console.log(err)
     ) 
       

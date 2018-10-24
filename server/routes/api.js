@@ -55,36 +55,53 @@ router.post('/dailyLogin',(req,res)=>{
 
 if(error){
 console.log(error)
+
 }
 else{
+    
 if(userloginData.length>0 ){
 
     if(loginData.outTime){
+       
+        
     dailyData.findOneAndUpdate({date: loginData.date,employeeID:loginData.employeeID},{$set:req.body},{new:false},(error,userUpdatedData)=>{
 
         if(error){
-            console.log(error)
+            res.status(401).send('Internal Error Occured')
             }
             else{
-                console.log(userUpdatedData)
+                
+                res.status(200).send(userUpdatedData)
             }
 
     })
+
+
+   
+
 }
 }
 else{
+   
 
+    if(loginData.outTime){
+        loginData.date='SessionTimedOut';
+
+        res.status(200).send(loginData)
+    }
+    else{
     
     let dayData=new dailyData(loginData)
     dayData.save((error,updatedData)=>{
         if(error){
-            console.log(error)
+            res.status(401).send('Internal Error Occured')
         }
         else{
             res.status(200).send(updatedData)
         }
 
     })
+}
 
 }
 }
